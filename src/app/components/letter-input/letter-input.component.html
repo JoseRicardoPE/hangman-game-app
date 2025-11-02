@@ -1,0 +1,11 @@
+<div class="game-keyboard">
+    <ng-container *ngFor="let letter of letters">
+        <button
+            class="game-key"
+            (click)="guessLetter(letter)"
+            [disabled]="isLetterDisabled(letter) || isDisabled"
+        >
+            {{ letter }}
+        </button>
+    </ng-container>
+</div>

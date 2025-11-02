@@ -1,0 +1,7 @@
+@use 'functions' as *;
+@use 'vars' as *;
+@use 'mixins' as *;
+
+.word {
+    margin-bottom: calculateRem(14px);
+}

@@ -1,0 +1,159 @@
+@use 'functions' as *;
+@use 'vars' as *;
+@use 'mixins' as *;
+
+.game-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-bg;
+    border-radius: $radius-lg;
+    margin: calculateRem(36px) auto;
+    width: 90%;
+    max-width: calculateRem(800px);
+    padding: calculateRem(16px);
+    box-shadow: $shadow-soft;
+}
+
+.game-title {
+    @include font-size($font-size-xl);
+    font-weight: $font-weight-bold;
+    margin: calculateRem(20px) 0;
+    text-align: center;
+    color: $color-primary;
+}
+
+.game-setup {
+    display: flex;
+    flex-direction: column;
+    gap: calculateRem(16px);
+    line-height: $line-height;
+}
+
+.game-setup__select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+    &::after {
+        content: '';
+        border-left: calculateRem(6px) solid transparent;
+        border-right: calculateRem(6px) solid transparent;
+        border-top: calculateRem(6px) solid $color-primary;
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    select {
+        @include custom-select();
+    }
+}
+
+.game-setup__button {
+    @include button();
+}
+
+.game-letters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: calculateRem(12px);
+}
+
+.game-reset {
+    @include button();
+    margin: calculateRem(16px) 0;
+}
+
+.game-guessedLetters,
+.game-wrongLetters {
+    font-weight: $font-weight-medium;
+    text-align: center;
+    span {
+        margin-left: calculateRem(8px);
+        font-weight: $font-weight-bold;
+    }
+}
+
+.game-status {
+    @include font-size($font-size-xxl);
+    font-weight: $font-weight-bold;
+    text-align: center;
+    margin-top: calculateRem(26px);
+}
+
+.game-winner-message {
+    color: $color-success;
+}
+
+.game-over-message {
+    color: $color-danger;
+    animation: shake 0.6s ease-in-out infinite alternate;
+    text-shadow: 0 0 calculateRem(10px) rgba(255, 0, 0, 0.5);
+}
+
+.game-attempts {
+    @include font-size($font-size-lg);
+    font-weight: $font-weight-medium;
+    margin-bottom: calculateRem(20px);
+
+    & span {
+        font-weight: $font-weight-bold;
+    }
+}
+
+/* Animación de sacudida */
+@keyframes shake {
+    0% {
+        transform: translate(0, 0) rotate(0);
+    }
+
+    20% {
+        transform: translate(-5px, 0) rotate(-2deg);
+    }
+
+    40% {
+        transform: translate(5px, 0) rotate(2deg);
+    }
+
+    60% {
+        transform: translate(-3px, 0) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(3px, 0) rotate(1deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0);
+    }
+}
+
+// Responsive
+@include responsive(tablet) {
+    .game-title {
+        @include font-size($font-size-xxl);
+    }
+
+    .game-setup {
+        flex-direction: row;
+    }
+
+    .game-setup--is-ready {
+        flex-direction: column;
+    }
+
+    .game-display {
+        display: flex;
+        align-items: center;
+        gap: calculateRem(16px);
+    }
+
+    .game-status {
+        margin-top: 0;
+    }
+}

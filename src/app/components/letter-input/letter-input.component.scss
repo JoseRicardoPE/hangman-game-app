@@ -1,0 +1,19 @@
+@use 'functions' as *;
+@use 'vars' as *;
+@use 'mixins' as *;
+
+.game-keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: calculateRem(16px);
+    padding: calculateRem(12px);
+    margin: calculateRem(24px) 0;
+}
+
+.game-key {
+    @include neumorphic($color-panel);
+    padding: calculateRem(12px) calculateRem(18px);
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+}

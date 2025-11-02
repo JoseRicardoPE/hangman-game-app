@@ -1,0 +1,58 @@
+@use 'functions' as *;
+@use "vars" as *;
+@use "mixins" as *;
+
+.hangman-container {
+    display: grid;
+    place-content: center;
+    margin: calculateRem(2rem) 0 calculateRem(22px);
+}
+
+.hangman {
+    width: calculateRem(200px);
+    height: calculateRem(260px);
+    stroke: #222;
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    /* Animación del trazado */
+    .body-part {
+        stroke: #e63946;
+        stroke-dasharray: 200;
+        stroke-dashoffset: 200;
+        opacity: 0;
+        animation: draw 0.8s ease-out forwards;
+    }
+
+    /* Poste y base con estilo madera */
+    line:not(.body-part) {
+        stroke: #6b4f2a;
+    }
+
+    .head {
+        stroke: #ff595e;
+    }
+
+    .body {
+        stroke: #ffca3a;
+    }
+
+    .arm-left,
+    .arm-right {
+        stroke: #8ac926;
+    }
+
+    .leg-left,
+    .leg-right {
+        stroke: #1982c4;
+    }
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}

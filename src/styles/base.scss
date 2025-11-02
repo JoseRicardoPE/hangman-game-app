@@ -1,0 +1,15 @@
+@use 'functions' as *;
+@use 'vars' as *;
+@use 'mixins' as *;
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: $font-family-main;
+    background-color: $color-bg;
+    color: $color-text;
+    line-height: $line-height;
+}
+

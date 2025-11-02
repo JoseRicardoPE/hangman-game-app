@@ -1,0 +1,95 @@
+@use 'sass:math';
+@use 'functions' as *;
+@use 'vars' as *;
+
+//? Mixin para asignar font-size en rem a partir de una variable en px
+@mixin font-size($size) {
+    font-size: calculateRem($size);
+}
+
+//? Mixin para los break point (media queries)
+@mixin responsive($device) {
+    $bp: map-get($breakpoints, $device);
+    @if $bp != null {
+        @media (min-width: #{$bp}) {
+            @content;
+        }
+    } @else {
+        @warn "Breakpoint #{$device} no encontrado";
+    }
+}
+
+@mixin custom-select($bg-color: $color-panel,
+    $border-color: $color-border,
+    $text-color: $color-text,
+    $border-radius: $radius-md,
+    $padding-x: 0.75rem,
+    $padding-right: 2.5rem) {
+    @include font-size($font-size);
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-color: $bg-color;
+    border: calculateRem(1px) solid $border-color;
+    border-radius: $border-radius;
+    color: $text-color;
+    font-family: $font-family-main;
+    padding: calculateRem(8px) $padding-right calculateRem(8px) $padding-x;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:focus {
+        outline: none;
+        border-color: $color-primary;
+    }
+
+    &:hover {
+        border-color: darken($color-primary, 10%);
+    }
+}
+
+@mixin neumorphic(
+    $bg-color: $color-panel,
+    $radius: calculateRem(8px),
+    $distance: calculateRem(4px),
+    $blur: calculateRem(8px),
+    $intensity: 10%
+) {
+    background: $bg-color;
+    border-radius: $radius;
+    box-shadow: 
+        $distance $distance $blur darken($color: $bg-color, $amount: $intensity),
+        -$distance -$distance $blur lighten($color: $bg-color, $amount: $intensity);
+    transition: all 0.2s ease;
+
+    &:active {
+        box-shadow: 
+            inset $distance $distance $blur darken($color: $bg-color, $amount: $intensity),
+            inset -$distance -$distance $blur lighten($color: $bg-color, $amount: $intensity);
+        transform: scale(0.97);
+    }
+}
+
+@mixin button(
+    $color: $color-primary,
+    $radius: $radius-md,
+    $border-width: 2px,
+    $padding: 8px,
+    $f-weight: $font-weight-medium,
+    $text-color: $color
+) {
+    padding: calculateRem($padding);
+    font-weight: $f-weight;
+    line-height: $line-height;
+    border: calculateRem($border-width) solid $color;
+    border-radius: $radius;
+    cursor: pointer;
+    color: $text-color;
+    transition: all 0.3s;
+    &:hover {
+        color: #fff;
+        background-color: $color;
+    }
+}
