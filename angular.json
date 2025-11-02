@@ -55,7 +55,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "https://JoseRicardoPE/hangman-game-app/"
             },
             "development": {
               "optimization": false,
